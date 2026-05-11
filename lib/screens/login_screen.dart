@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dashboard_screen.dart';
-// import 'inventory_screen.dart';
-// import 'recipe_screen.dart';
-// import 'orders_screen.dart';
-// import 'suppliers_screen.dart';
-// import 'analytics_screen.dart';
+import 'inventory_screen.dart';
+import 'recipe_screen.dart';
+import 'orders_screen.dart';
+import 'suppliers_screen.dart';
+import 'analytics_screen.dart';
 import 'kitchen_dashboard.dart';
 import 'procurement_dashboard.dart';
 import 'finance_dashboard.dart';

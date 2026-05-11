@@ -39,6 +39,7 @@ dependencies:
   http: ^1.2.0          # For API calls
   provider: ^6.0.0      # State management
   shared_preferences: ^2.2.0 # Store login tokens locally
+  supabase_flutter: ^2.0.0
 
 
 dev_dependencies:
