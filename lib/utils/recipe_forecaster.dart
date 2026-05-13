@@ -18,8 +18,9 @@ class RecipeForecaster {
     ];
   }
 
-  static bool canPrepare(Recipe recipe) {
-    final inventory = InventoryService.getInventory();
+  // ✅ Make this async because inventory fetch is async
+  static Future<bool> canPrepare(Recipe recipe) async {
+    final inventory = await InventoryService.getInventory(); // wait for DB
 
     for (var entry in recipe.ingredients.entries) {
       final item = inventory.firstWhere(
@@ -28,7 +29,6 @@ class RecipeForecaster {
           name: entry.key,
           quantity: 0,
           unit: '',
-          expiryDate: DateTime.now(),
           reorderPoint: 0,
         ),
       );

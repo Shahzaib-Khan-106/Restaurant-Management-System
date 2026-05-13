@@ -1,24 +1,15 @@
 class Item {
   final String name;
-  final double quantity;
   final String unit;
-  final DateTime expiryDate;
-  final double reorderPoint; // new field
+  int quantity;
+  final int reorderPoint;
 
   Item({
     required this.name,
-    required this.quantity,
     required this.unit,
-    required this.expiryDate,
+    this.quantity = 0,
     required this.reorderPoint,
   });
 
-  bool get isExpiringSoon {
-    final now = DateTime.now();
-    return expiryDate.difference(now).inDays <= 5;
-  }
-
-  bool get needsReorder {
-    return quantity < reorderPoint;
-  }
+  bool get needsReorder => quantity < reorderPoint;
 }

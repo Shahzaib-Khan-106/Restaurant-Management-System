@@ -40,6 +40,7 @@ dependencies:
   provider: ^6.0.0      # State management
   shared_preferences: ^2.2.0 # Store login tokens locally
   supabase_flutter: ^2.0.0
+  collection: ^1.17.0
 
 
 dev_dependencies:

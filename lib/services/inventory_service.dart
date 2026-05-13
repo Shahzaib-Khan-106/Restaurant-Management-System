@@ -1,11 +1,37 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/item.dart';
 
 class InventoryService {
-  static List<Item> getInventory() {
-    return [
-      Item(name: 'Tomatoes', quantity: 20, unit: 'kg', expiryDate: DateTime(2026, 5, 12), reorderPoint: 10),
-      Item(name: 'Cheese', quantity: 5, unit: 'kg', expiryDate: DateTime(2026, 5, 20), reorderPoint: 8),
-      Item(name: 'Olive Oil', quantity: 10, unit: 'liters', expiryDate: DateTime(2027, 1, 1), reorderPoint: 5),
-    ];
+  static final supabase = Supabase.instance.client;
+
+  // ✅ Insert item into Supabase
+  static Future<void> addItem(String name, String unit, int reorderPoint) async {
+    await supabase.from('items').insert({
+      'name': name,
+      'unit': unit,
+      'quantity': 0,
+      'reorder_point': reorderPoint,
+    });
+  }
+
+  // ✅ Fetch items from Supabase
+  static Future<List<Item>> getInventory() async {
+    final response = await supabase.from('items').select();
+    return response.map<Item>((row) {
+      return Item(
+        name: row['name'],
+        unit: row['unit'],
+        quantity: row['quantity'],
+        reorderPoint: row['reorder_point'],
+      );
+    }).toList();
+  }
+
+  // ✅ Update item quantity
+  static Future<void> updateQuantity(String name, int newQuantity) async {
+    await supabase
+        .from('items')
+        .update({'quantity': newQuantity})
+        .eq('name', name);
   }
 }
